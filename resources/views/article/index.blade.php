@@ -1,9 +1,8 @@
 <x-layout>
     <div class="container my-5">
         <div class="row">
-            <div class="col-12 text-center mb-4">
-                <h1>Benvenuto su The Aulab Post</h1>
-                <p class="lead">Il tuo portale di informazione e notizie</p>
+            <div class="col-12">
+                <h1 class="mb-4">Tutti gli articoli</h1>
             </div>
         </div>
         
@@ -22,13 +21,13 @@
                             <p class="card-text">
                                 <small class="text-muted">
                                     @if($article->category)
-                                        Categoria: <a href="{{ route('article.by-category', $article->category) }}">{{ $article->category->name }}</a>
+                                        Categoria: <a href="#">{{ $article->category->name }}</a>
                                     @endif
                                 </small>
                             </p>
                             <p class="card-text">
                                 <small class="text-muted">
-                                    Scritto da: <a href="{{ route('article.by-user', $article->user) }}">{{ $article->user->name }}</a>
+                                    Scritto da: <a href="#">{{ $article->user->name }}</a>
                                 </small>
                             </p>
                             <p class="card-text">
@@ -36,39 +35,21 @@
                                     {{ $article->created_at->format('d/m/Y') }}
                                 </small>
                             </p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <a href="{{ route('article.show', $article) }}" class="btn btn-primary">Leggi</a>
-                                <span class="text-muted">{{ $article->read_time }} min di lettura</span>
-                            </div>
+                            <a href="{{ route('article.show', $article) }}" class="btn btn-primary">Leggi</a>
                         </div>
                     </div>
                 </div>
             @empty
                 <div class="col-12">
-                    <div class="alert alert-info text-center" role="alert">
-                        Non ci sono ancora articoli da visualizzare.
-                        @auth
-                            <p class="mt-3">
-                                <a href="{{ route('article.create') }}" class="btn btn-primary">Scrivi il primo articolo</a>
-                            </p>
-                        @else
-                            <p class="mt-3">
-                                <a href="{{ route('login') }}" class="btn btn-primary">Accedi per scrivere</a>
-                            </p>
-                        @endauth
-                    </div>
+                    <p class="text-center">Nessun articolo disponibile</p>
                 </div>
             @endforelse
         </div>
-
-        @auth
-            <div class="row mt-4">
-                <div class="col-12 text-center">
-                    <a href="{{ route('article.create') }}" class="btn btn-success">
-                        <i class="fas fa-plus-circle"></i> Scrivi un nuovo articolo
-                    </a>
-                </div>
+        
+        <div class="row mt-4">
+            <div class="col-12 d-flex justify-content-center">
+                {{ $articles->links() }}
             </div>
-        @endauth
+        </div>
     </div>
 </x-layout>
