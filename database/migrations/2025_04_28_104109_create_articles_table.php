@@ -8,6 +8,14 @@ return new class extends Migration
 {
     public function up(): void
     {
+        // Prima creiamo la tabella categories
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        // Poi creiamo la tabella articles con la foreign key
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
@@ -40,6 +48,8 @@ return new class extends Migration
 
     public function down(): void
     {
+        // Bisogna eliminare prima la tabella articles, poi categories
         Schema::dropIfExists('articles');
+        Schema::dropIfExists('categories');
     }
 };

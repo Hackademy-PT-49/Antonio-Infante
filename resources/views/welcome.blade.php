@@ -12,7 +12,7 @@
                 <div class="col-md-6 col-lg-3 mb-4">
                     <div class="card h-100">
                         @if($article->image)
-                            <img src="{{ asset('storage/articles/' . $article->image) }}" class="card-img-top" alt="{{ $article->title }}">
+                            <img src="{{ Storage::url('articles/'.$article->image) }}" class="card-img-top" alt="{{ $article->title }}">
                         @else
                             <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="Placeholder">
                         @endif
@@ -38,7 +38,7 @@
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="{{ route('article.show', $article) }}" class="btn btn-primary">Leggi</a>
-                                <span class="text-muted">{{ $article->read_time }} min di lettura</span>
+                                <span class="text-muted">{{ $article->readTime ?? '1' }} min di lettura</span>
                             </div>
                         </div>
                     </div>

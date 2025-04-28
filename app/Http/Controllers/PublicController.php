@@ -9,9 +9,8 @@ class PublicController extends Controller
 {
     public function homepage()
     {
-        // Recupera gli ultimi 4 articoli accettati, con le relazioni user e category
-        $articles = Article::where('is_accepted', true)
-            ->with(['user', 'category'])
+        // Recupera gli ultimi 4 articoli, indipendentemente dallo stato di approvazione (per test)
+        $articles = Article::with(['user', 'category'])
             ->latest()
             ->take(4)
             ->get();
